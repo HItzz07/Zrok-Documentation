@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --color-zrok: #16b46c;
+  --color-zrok-dim: rgba(22, 180, 108, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background-color: #060b14;
+  color: #e2e8f0;
+  font-family: var(--font-inter);
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #090f1b; }
+::-webkit-scrollbar-thumb { background: rgba(22,180,108,0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(22,180,108,0.6); }
+
+/* Glass morphism */
+.glass {
+  background: rgba(13, 21, 37, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(22,180,108,0.12);
+}
+
+.glass-strong {
+  background: rgba(9, 15, 27, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(22,180,108,0.2);
+}
+
+/* Glow effects */
+.glow-green {
+  box-shadow: 0 0 30px rgba(22,180,108,0.25),
+              0 0 60px rgba(22,180,108,0.1);
+}
+
+.glow-text {
+  text-shadow: 0 0 30px rgba(22,180,108,0.5);
+}
+
+/* Terminal styles */
+.terminal {
+  background: #020408;
+  border: 1px solid rgba(22,180,108,0.2);
+  border-radius: 12px;
+  font-family: var(--font-mono);
+  overflow: hidden;
+}
+
+.terminal-header {
+  background: rgba(22,180,108,0.05);
+  border-bottom: 1px solid rgba(22,180,108,0.1);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-body {
+  padding: 20px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Badge gradient */
+.badge-gradient {
+  background: linear-gradient(135deg, rgba(22,180,108,0.2), rgba(22,180,108,0.05));
+  border: 1px solid rgba(22,180,108,0.3);
+}
+
+/* Progress bar */
+.progress-bar {
+  background: linear-gradient(90deg, #16b46c, #39ce87, #16b46c);
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* Section anchors */
+.section-anchor {
+  scroll-margin-top: 90px;
+}
+
+/* Code highlight override */
+pre {
+  border-radius: 10px !important;
+  font-size: 13px !important;
+}
+
+/* Animated grid bg */
+.grid-bg {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(22 180 108 / 0.05)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+}
+
+/* Hover card lift */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(22,180,108,0.15);
+}
+
+/* Nav link active */
+.nav-link-active {
+  color: #16b46c;
+  border-left: 2px solid #16b46c;
+  padding-left: 12px;
+  background: rgba(22,180,108,0.05);
+}
+
+/* Shimmer text */
+.shimmer-text {
+  background: linear-gradient(90deg, #16b46c 0%, #73e3ac 50%, #16b46c 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Animated underline */
+.underline-anim {
+  position: relative;
+}
+.underline-anim::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #16b46c;
+  transition: width 0.3s ease;
+}
+.underline-anim:hover::after { width: 100%; }
+
+/* Achievement unlock animation */
+@keyframes achievementPop {
+  0%   { transform: scale(0) rotate(-10deg); opacity: 0; }
+  70%  { transform: scale(1.1) rotate(2deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.achievement-pop {
+  animation: achievementPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
