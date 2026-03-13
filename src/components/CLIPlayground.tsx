@@ -54,6 +54,35 @@ const COMMANDS: Record<string, { desc: string; output: string[] }> = {
       '✓ access established on http://127.0.0.1:9090',
     ],
   },
+  'zrok create name my-app': {
+    desc: 'Reserve a persistent name in the public namespace',
+    output: [
+      '✓ name "my-app" created in namespace "public"',
+      '  → access with: -n public:my-app',
+    ],
+  },
+  'zrok list namespaces': {
+    desc: 'List available namespaces',
+    output: [
+      'Namespaces',
+      '  public        open    default',
+      '  team-shared   closed  active',
+    ],
+  },
+  'zrok share public 8080 -n public:my-app': {
+    desc: 'Share port 8080 using a reserved name',
+    output: [
+      '⠸ establishing persistent share...',
+      '✓ share ready at https://my-app.share.zrok.io',
+    ],
+  },
+  'zrok drive': {
+    desc: 'Enable zrok drive for file sharing',
+    output: [
+      '⠸ starting drive server...',
+      '✓ drive established on http://127.0.0.1:18080',
+    ],
+  },
   'zrok status': {
     desc: 'Show active shares and environments',
     output: [
@@ -76,12 +105,11 @@ const COMMANDS: Record<string, { desc: string; output: string[] }> = {
 const QUICK_CMDS = [
   'zrok version',
   'zrok invite',
-  'zrok enable --apiEndpoint https://api.zrok.io',
-  'zrok share public 8080',
-  'zrok share private 8080',
-  'zrok access private <token>',
+  'zrok enable',
+  'zrok create name my-app',
+  'zrok list namespaces',
+  'zrok share public 8080 -n public:my-app',
   'zrok status',
-  'zrok disable',
 ]
 
 export default function CLIPlayground() {

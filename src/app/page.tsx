@@ -17,8 +17,9 @@ import CLIPlayground from '@/components/CLIPlayground'
 import AchievementPanel from '@/components/AchievementPanel'
 import InstallTabs from '@/components/InstallTabs'
 import CodeBlock from '@/components/CodeBlock'
+import NamespaceChart from '@/components/NamespaceChart'
 
-const SECTIONS = ['what','why','how','install','tutorial','shares','advanced','selfhost','usecases','playground']
+const SECTIONS = ['what','why','how','install','tutorial','shares','namespaces','advanced','selfhost','usecases','playground']
 
 // ── Hero particle component (precomputed to avoid WAAPI Infinity bug) ────────
 const PARTICLES = [
@@ -559,6 +560,65 @@ export default function Home() {
             <ShareToggle />
           </Section>
 
+          {/* ── SECTION 7: NAMESPACES & RESERVED NAMES ────────────────────── */}
+          <Section
+            id="namespaces"
+            badge="07 · Persistence"
+            title="Namespaces & Reserved Names"
+            subtitle="In zrok v2.0+, persistent sharing is managed through Namespaces and Reserved Names. No more random, ephemeral tokens."
+          >
+            <NamespaceChart />
+
+            <div className="mt-8 grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-white">Why Namespaces?</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  Namespaces act as logical groupings (like DNS zones). Names within them are unique and persistent identifiers for your shares.
+                </p>
+                <ul className="space-y-2">
+                  {[
+                    'Persistent tokens across restarts',
+                    'Logical resource grouping',
+                    'Zero coupling between environments & names',
+                    'Custom domain support (pro feature)',
+                  ].map((p, i) => (
+                    <li key={i} className="flex gap-2 text-sm text-slate-300">
+                      <span className="text-zrok-500">✓</span> {p}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-white">Core Workflow</h3>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-xs text-slate-500 mb-1">1. Create a reserved name</p>
+                    <CodeBlock code="$ zrok create name -n public my-prod-api" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 mb-1">2. Start sharing using that name</p>
+                    <CodeBlock code="$ zrok share public localhost:8080 -n public:my-prod-api" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 mb-1">3. Check your namespaces</p>
+                    <CodeBlock code="$ zrok list namespaces" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 p-5 glass rounded-2xl border border-zrok-500/20">
+              <div className="flex items-center gap-3 mb-2">
+                <Shield className="text-zrok-400" size={18} />
+                <h4 className="text-white font-bold">Closed Namespaces</h4>
+              </div>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                While the <code className="text-zrok-400">public</code> namespace is open to everyone, you can create <code className="text-purple-400">Closed Namespaces</code> to restrict which accounts can create or use names within that group.
+              </p>
+            </div>
+          </Section>
+
           {/* ── SECTION 7: ADVANCED FEATURES ──────────────────────────────── */}
           <Section
             id="advanced"
@@ -640,6 +700,24 @@ $ zrok share private \\
 
 # Colleague accesses:
 $ zrok access private <token>`} />
+              </div>
+
+              {/* zrok Drive */}
+              <div className="glass rounded-2xl p-6 border border-white/5 hover:border-zrok-500/20 transition-colors card-hover">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center">
+                    <Database size={18} className="text-orange-400" />
+                  </div>
+                  <h3 className="font-bold text-white">zrok Drive & Copy</h3>
+                </div>
+                <p className="text-slate-400 text-sm mb-4 leading-relaxed">
+                  The <code className="text-orange-400">drive</code> and <code className="text-orange-400">copy</code> modes provide a distributed file sharing system with built-in sync.
+                </p>
+                <CodeBlock code={`# Mount a remote zrok drive locally
+$ zrok drive mount <share_token> /mnt/zrok
+
+# Copy files between drives
+$ zrok copy local_file.zip zrok:remote_dir/`} />
               </div>
             </div>
 

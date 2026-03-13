@@ -10,10 +10,11 @@ const navSections = [
   { id: 'install',   label: '04 Installation',       emoji: '📦' },
   { id: 'tutorial',  label: '05 First Share',        emoji: '🚀' },
   { id: 'shares',    label: '06 Public vs Private',  emoji: '🔐' },
-  { id: 'advanced',  label: '07 Advanced Features',  emoji: '🧩' },
-  { id: 'selfhost',  label: '08 Self Hosting',       emoji: '🖥️' },
-  { id: 'usecases',  label: '09 Use Cases',          emoji: '💼' },
-  { id: 'playground',label: '10 CLI Playground',     emoji: '🎮' },
+  { id: 'namespaces',label: '07 Namespaces & Names', emoji: '🏷️' },
+  { id: 'advanced',  label: '08 Advanced Features',  emoji: '🧩' },
+  { id: 'selfhost',  label: '09 Self Hosting',       emoji: '🖥️' },
+  { id: 'usecases',  label: '10 Use Cases',          emoji: '💼' },
+  { id: 'playground',label: '11 CLI Playground',     emoji: '🎮' },
 ]
 
 export default function Navigation({

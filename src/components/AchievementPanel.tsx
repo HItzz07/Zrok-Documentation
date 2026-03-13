@@ -18,6 +18,7 @@ const ACHIEVEMENTS: Achievement[] = [
   { id: 'install',    title: 'Installer',          desc: 'Ready to install',               icon: '📦', xp: 75  },
   { id: 'tutorial',   title: 'First Tunnel!',      desc: 'Completed your first share',     icon: '🚀', xp: 150 },
   { id: 'shares',     title: 'Security Minded',    desc: 'Understand public vs private',   icon: '🔐', xp: 100 },
+  { id: 'namespaces', title: 'Namespace Pro',      desc: 'Mastered reserved names',        icon: '🏷️', xp: 100 },
   { id: 'advanced',   title: 'Power User',         desc: 'Unlocked advanced features',     icon: '⚡', xp: 125 },
   { id: 'selfhost',   title: 'Operator',           desc: 'Ready to self-host',             icon: '🖥️', xp: 150 },
   { id: 'usecases',   title: 'Visionary',          desc: 'Saw the real-world potential',   icon: '🌍', xp: 100 },
@@ -45,7 +46,8 @@ export default function AchievementPanel({ completed }: { completed: Set<string>
     <>
       {/* Achievement unlock toast */}
       {newUnlock && (() => {
-        const ach = ACHIEVEMENTS.find(a => a.id === newUnlock)!
+        const ach = ACHIEVEMENTS.find(a => a.id === newUnlock)
+        if (!ach) return null
         return (
           <motion.div
             initial={{ y: 80, opacity: 0, scale: 0.8 }}
